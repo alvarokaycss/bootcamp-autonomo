@@ -2,18 +2,18 @@
 
 ## Propósito
 
-Definir como o mentor utiliza o Notion como sistema de memória e acompanhamento da Software Engineering Residency.
+Definir como o mentor utiliza o Notion como sistema de memória e acompanhamento da Software Engineering Residency, orientando-se estritamente pelos esquemas do [NOTION_WORKSPACE_BLUEPRINT.md](file:///C:/Users/kaycs/.gemini/antigravity/scratch/software-engineering-residency/00-overview/NOTION_WORKSPACE_BLUEPRINT.md).
 
 O Notion não deve ser um registro de toda conversa realizada, mas uma base estruturada de conhecimento sobre a evolução do aluno.
 
 ## Missão
 
-Garantir que informações relevantes sejam preservadas:
+Garantir que informações relevantes sejam preservadas nas 4 bases de dados oficiais (`Sessions`, `Competency Framework`, `AI Mentor Skills Registry` e `Case Studies`):
 
 - competências adquiridas;
 - evidências de evolução;
 - gaps identificados;
-- decisões técnicas importantes;
+- decisões técnicas importantes (ADRs);
 - progresso da trilha.
 
 ## Princípios de comportamento
@@ -24,7 +24,7 @@ O mentor deve evitar transformar o Notion em histórico bruto de mensagens.
 
 Registrar:
 
-- mudanças de competência;
+- mudanças de competência (`Nível 1` a `Nível 4`);
 - decisões arquiteturais;
 - aprendizados importantes;
 - dificuldades recorrentes.
@@ -37,7 +37,7 @@ Não registrar:
 
 ### 2. O registro deve possuir contexto
 
-Uma informação salva deve responder:
+Uma informação salva na base `Sessions` ou `Competency Framework` deve responder:
 
 - O que foi aprendido?
 - Por que isso importa?
@@ -49,6 +49,30 @@ Uma informação salva deve responder:
 O mentor deve conectar:
 
 Sessão → Conceito → Competência → Evidência → Próximo objetivo
+
+---
+
+## Esquemas de Destino (Baseados no Notion Workspace Blueprint)
+
+Ao realizar uma atualização via API ou MCP do Notion, o mentor deve respeitar as seguintes propriedades:
+
+### Tabela `📝 Sessions`
+- `Sessão` (title): Título e número da sessão.
+- `Módulo` (rich_text): Módulo da ementa.
+- `Data` (date): Data atual.
+- `Duração` (number): Tempo de aula.
+- `Competências` (multi_select): Tags das competências abordadas.
+- `Resumo` (rich_text): O que foi trabalhado.
+- `Dúvidas / Gaps` (rich_text): Lacunas observadas.
+- `Próximo Passo` (rich_text): Próxima aula.
+
+### Tabela `📊 Competency Framework`
+- `Competência` (title): Nome da competência core.
+- `Nível Atual` (select): `Nível 1 — Fundamentos` | `Nível 2 — Aplicação` | `Nível 3 — Decisão` | `Nível 4 — Arquitetura`.
+- `Status` (select): `🔴 Não Iniciado` | `🟡 Em Desenvolvimento` | `🟢 Consolidado` | `🏆 Dominado`.
+- `Última Evidência` (rich_text): Citação do aluno.
+
+---
 
 ## Eventos que devem atualizar o Notion
 
@@ -64,30 +88,26 @@ Quando o aluno analisa alternativas e escolhe uma solução justificadamente.
 ### Conclusão de estudo de caso
 Quando um problema real foi projetado e avaliado.
 
-## Eventos que não devem atualizar o Notion
-
-- perguntas isoladas;
-- exemplos temporários;
-- explicações introdutórias sem evolução registrada;
-- informações sem impacto na formação.
+---
 
 ## Processo de sincronização
 
+### Etapa 0 — Verificar Auto-Provisionamento
+Se as tabelas no Notion não existirem, invocar o protocolo de criação definido no [NOTION_WORKSPACE_BLUEPRINT.md](file:///C:/Users/kaycs/.gemini/antigravity/scratch/software-engineering-residency/00-overview/NOTION_WORKSPACE_BLUEPRINT.md).
+
 ### Etapa 1 — Detectar evento relevante
-Identificar se houve evolução, gap ou decisão importante.
+Identificar se houve evolução, gap ou decisão importante ao longo da conversa.
 
 ### Etapa 2 — Classificar informação
-Relacionar com:
-- competência;
-- módulo;
-- evidência;
-- objetivo futuro.
+Relacionar com a competência, módulo, evidência e objetivo futuro.
 
 ### Etapa 3 — Registrar
-Atualizar as bases adequadas do Residency.
+Executar a chamada de API/MCP enviando os campos nos formatos especificados.
 
 ### Etapa 4 — Validar consistência
 Garantir que o registro represente evolução real e não apenas atividade.
+
+---
 
 ## Perguntas obrigatórias do mentor
 
@@ -97,6 +117,8 @@ Garantir que o registro represente evolução real e não apenas atividade.
 - Esse registro ajudará decisões futuras da trilha?
 - Estamos registrando evolução ou apenas conversa?
 
+---
+
 ## Comportamentos proibidos
 
 O mentor não deve:
@@ -104,14 +126,11 @@ O mentor não deve:
 - salvar toda interação no Notion;
 - criar progresso artificial;
 - registrar competências sem evidências;
-- substituir avaliação por quantidade de registros.
+- substituir avaliação por quantidade de registros;
+- alterar esquemas de propriedades fora do Blueprint.
+
+---
 
 ## Critério de ativação
 
 Esta skill está ativa quando o mentor mantém uma memória estruturada da formação, permitindo acompanhamento contínuo e decisões melhores sobre a evolução do aluno.
-
-## Exemplo de aplicação
-
-Sessão: Aluno projeta um sistema de mensagens.
-Registro inadequado: "Aluno estudou Kafka hoje."
-Registro adequado: "Aluno identificou necessidade de processamento assíncrono em um sistema de mensagens, comparou alternativas e justificou uso de streaming de eventos considerando escala e operação."
