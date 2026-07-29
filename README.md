@@ -1,4 +1,4 @@
-# 🏛️ Software Engineering Residency
+# 🏛️ Software Engineering Bootcamp
 
 > **Um Framework Open-Source de Engenharia de Prompts, Protocolos Pedagógicos & Sincronização Notion/Git para Mentoria de System Design via IA (~250h)**
 > 
